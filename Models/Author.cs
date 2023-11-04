@@ -7,5 +7,6 @@ namespace Negru_Luminita_Lab2.Models
         public int ID { get; set; }
         public string FirstName {  get; set; }
         public string LastName { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
     }
 }
