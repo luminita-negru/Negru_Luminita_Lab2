@@ -47,13 +47,13 @@ namespace Negru_Luminita_Lab2.Pages.Books
 
             PopulateAssignedCategoryData(_context, Book);
 
-            var authorList = _context.Author.Select(x => new
+            /*var authorList = _context.Author.Select(x => new
             {
                 x.ID,
                 FullName = x.LastName + " " + x.FirstName
-            });
+            });*/
 
-            ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
+            ViewData["AuthorID"] = new SelectList(_context.Author, "ID", "FullName");
             ViewData["PublisherID"] = new SelectList(_context.Publisher, "ID", "PublisherName");
 
             return Page();
@@ -82,7 +82,7 @@ namespace Negru_Luminita_Lab2.Pages.Books
             if (await TryUpdateModelAsync<Book>(
                 bookToUpdate,
                 "Book",
-                i => i.Title, i => i.Author,
+                i => i.Title, i => i.AuthorID,
                 i => i.Price, i => i.PublishingDate, i => i.PublisherID))
             {
                 UpdateBookCategories(_context, selectedCategories, bookToUpdate);
