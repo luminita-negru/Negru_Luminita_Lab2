@@ -20,12 +20,19 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Category) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td>
+        @foreach (var item in Model.CategoryData.Categories)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.CategoryID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                <a asp-page="./Index" asp-route-id="@item.ID">Select</a> |
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
@@ -34,3 +41,35 @@
 }
     </tbody>
 </table>
+@if (Model.CategoryData != null && Model.CategoryData.Categories != null)
+{
+    <h3>Books from the selected category </h3>
+    <table>
+        @foreach (var item in Model.CategoryData.Categories)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.CategoryID)
+            {
+                selectedRow = "table-success";
+                <tr class="@selectedRow">
+                    <td>
+                        @if (Model.CategoryData.Books != null)
+                        {
+                            foreach (var book in Model.CategoryData.Books)
+                            {
+                                var bookTitle = book.Book?.Title ?? "Unknown Title";
+
+                                var authorName = book.Book?.Author?.FullName ?? "Unknown Author";
+                                <span>
+                                    <p><b>Book Title:</b> @bookTitle</p>
+                                    <p><b>Book Author:</b> @authorName</p>
+                                </span>
+                                //  @book.Title @: @book.Author.FullName
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+}
