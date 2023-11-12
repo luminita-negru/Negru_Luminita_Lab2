@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Negru_Luminita_Lab2.Data;
 
@@ -11,9 +12,10 @@ using Negru_Luminita_Lab2.Data;
 namespace Negru_Luminita_Lab2.Migrations
 {
     [DbContext(typeof(Negru_Luminita_Lab2Context))]
-    partial class Negru_Luminita_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20231109160427_Borrowings")]
+    partial class Borrowings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
